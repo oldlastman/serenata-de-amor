@@ -3,10 +3,11 @@ import requests
 import re
 import os.path
 import datetime
-import configparser
 from unicodedata import normalize
-import pandas as pd
+
+from decouple import config
 import numpy as np
+import pandas as pd
 from pandas.io.json import json_normalize
 
 
@@ -105,9 +106,7 @@ REIMBURSEMENTS_DATASET_PATH = find_newest_file('reimbursements')
 COMPANIES_DATASET_PATH = find_newest_file('companies')
 YELP_DATASET_PATH = os.path.join('data', 'yelp-companies.xz')
 
-settings = configparser.RawConfigParser()
-settings.read('config.ini')
-ACCESS_TOKEN = settings.get('Yelp', 'AccessToken')
+ACCESS_TOKEN = config('YELP_ACCESS_TOKEN')
 
 
 if __name__ == '__main__':

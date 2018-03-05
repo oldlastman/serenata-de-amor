@@ -6,7 +6,6 @@ import os
 import sys
 from argparse import ArgumentParser
 from concurrent.futures import CancelledError
-from configparser import RawConfigParser
 from csv import DictWriter
 from datetime import date
 from io import StringIO
@@ -92,9 +91,7 @@ class SexPlacesNearBy:
         :param company: (dict) Company with name, cnpj, latitude and longitude
         :param key: (str) Google Places API key
         """
-        settings = RawConfigParser()
-        settings.read('config.ini')
-        self.url = GooglePlacesURL(key or settings.get('Google', 'APIKey'))
+        self.url = GooglePlacesURL(key or config('GOOGLE_API_KEY'))
 
         self.company = company
         self.latitude = self.company['latitude']
